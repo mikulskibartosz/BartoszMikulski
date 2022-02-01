@@ -1,0 +1,68 @@
+---
+layout: default
+title: Home
+---
+
+{% if page.url == "/" %}
+
+<div class="heroBanner">
+    <div class="container">
+
+        <div class="mainheading">
+            <h1 class="sitetitle mb-3 color-2">{{ site.name }}</h1>
+            <p class="lead">
+                {{ site.description }}
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Blog Filter start-->
+
+<section class="section-filter sticky-top bg-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="d-flex align-items-center flex-wrap">
+
+                    <h4 class="me-3 color-2 mb-4 mb-md-0">Categories:</h4>
+                    
+                    <ul id="filter" class="filter text-center d-flex align-items-center flex-wrap">
+                        <li class="active mb-3 mb-md-0" data-group="all">All</li>
+                        {% assign categories = site.posts | map: 'categories' | uniq %}
+                            {% for category in categories %}
+                            <li data-group="{{ category }}" class="text-capitalize mb-3 mb-md-0">{{ category }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% endif %}
+
+</section>
+
+
+<section class="recent-posts">
+    <div class="container">
+        <div class="row listrecent list-items-container mt-5" >
+
+            {% for post in paginator.posts %}
+
+                {% include postbox.html %}
+
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- Pagination
+================================================== -->
+<div class="bottompagination">
+<div class="pointerup"><i class="fa fa-caret-up"></i></div>
+<span class="navigation" role="navigation">
+    {% include pagination.html %}
+</span>
+</div>
+
