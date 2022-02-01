@@ -1,0 +1,68 @@
+<aside class="aside">
+    {% if page.author %}
+    <div class="panel sidebar-about-author bg-2 text-center">
+        
+        <img class="author-thumb" src="{{site.baseurl}}/{{ author.author_image }}" alt="{{ author.display_name }}">
+        
+        
+        <h5 class="my-3 color-2">{{ author.display_name }}</h5>
+        <p class="mb-3 color-1">{{ site.description }}</p>
+
+        <div class="foot-social sharePost d-flex">
+            {% if site.facebook_username %}
+            <a href="https://www.facebook.com/{{ site.facebook_username }}">
+                <i class="fab fa-facebook-f"></i>
+            </a>
+            {% endif %}
+
+            {% if site.twitter_username %}
+            <a href="https://twitter.com/{{ site.twitter_username }}">
+                <i class="fab fa-twitter"></i>
+            </a>
+            {% endif %}
+
+            {% if site.instagram_username %}
+            <a href="http://instagram.com/{{ site.instagram_username }}" >
+                <i class="fab fa-instagram"></i>
+            </a>
+            {% endif %}
+
+            {% if site.linkedin_username %}
+            <a href="https://www.linkedin.com/in/{{ site.linkedin_username }}">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            {% endif %}
+        </div>
+
+    </div>
+    {% endif %}
+
+    <div class="section-title sidebar-recent-posts">
+        <h2 class="panel-title color-2 mb-3"> <span>Featured Posts</span></h2>
+
+        <ul>
+            {% for post in site.posts limit %}
+                {% if post.featured == true %}
+                    <li class="pb-3">
+                        <a class="panel bg-2 d-block color-2" href="{{ site.baseurl }}{{ post.url }}"> <p class="color-2">{{ post.title }}</p>
+                        <span class="color-1 text-small">{{ post.date | date: "%B %-d, %Y" }}</span>
+                        </a> 
+                    </li>
+                {% endif %}
+            {% endfor %}
+        </ul>
+
+        
+    </div>
+
+    {% capture site_tags %}{% for tag in site.tags %}{{ tag | first }}{% unless forloop.last %},{% endunless %}{% endfor %}{% endcapture %}
+    {% assign sortedTags = site_tags | split:',' | sort %}
+    <div class="section-title sidebar-category">
+        <h2 class="panel-title color-2 mb-3"> <span>Tags</span></h2>
+        <div class="tagcloud">
+            {% for tag in sortedTags %}
+            <a href="{{site.baseurl}}/tags/#{{ tag | cgi_escape }}">{{ tag }}</a>
+            {% endfor %}
+        </div>
+    </div>
+</aside>

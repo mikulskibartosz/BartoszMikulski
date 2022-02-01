@@ -1,0 +1,39 @@
+<!-- begin post -->
+{% assign author = site.authors[post.author] %}
+
+<div class="col-lg-4 col-md-6 mb-30px card-group list-item" data-groups="all {% for category in post.categories %}{{category}} {% endfor %}">
+    <div class="card h-100 mb-0">
+        <div class="card-body">
+
+            <ul class="d-flex mb-4 postCategories" id="filter">
+                {% for category in post.categories %}
+                    <li><a class="py-2 px-3 mr-2 d-block rounded-1 bg-1 text-white text-capitalize" href="#">{{category}}</a></li>
+                {% endfor %}
+            </ul>
+            
+
+            <h2 class="card-title">
+                <a class="color-2" href="{{ site.baseurl }}{{ post.url }}"> <span class="underline">{{ post.title }}</span></a>
+            </h2>
+            <h4 class="card-text">{{ post.excerpt | strip_html | truncatewords:30 }}</h4>
+        </div>
+        <div class="card-footer bg-white">
+            <div class="wrapfooter">
+                {% if post.author %}
+                <span class="meta-footer-thumb">
+                    {% if author.avatar %}
+                    <img class="author-thumb" src="{{site.baseurl}}/{{ author.avatar }}" alt="{{ author.display_name }}">
+                    {% endif %}
+                </span>
+                <span class="author-meta">
+                    <span class="post-name"><a target="_blank" href="{{ author.web }}">{{ author.display_name }}</a></span><br/>
+                    {% endif %}
+                    <span class="post-date">{{ post.date | date_to_string }}</span>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- end post -->
